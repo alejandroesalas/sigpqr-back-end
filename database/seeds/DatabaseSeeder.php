@@ -120,8 +120,8 @@ class DatabaseSeeder extends Seeder
             'status_response' => 1,
             'type' => 1,
             'request_id' => 1,
-            'student_id' => 2,
-            'coordinator_id' => 2,
+            'user_id' => 2,
+            'type_user' => 'estudiante',
         ]);
         // Registro de peticion
         DB::table('requests')->insert([
@@ -139,8 +139,8 @@ class DatabaseSeeder extends Seeder
             'status_response' => 1,
             'type' => 2,
             'request_id' => 2,
-            'student_id' => 3,
-            'coordinator_id' => 2,
+            'user_id' => 3,
+            'type_user' => 'estudiante',
         ]);
         // Registro de peticion
         DB::table('requests')->insert([
@@ -158,8 +158,8 @@ class DatabaseSeeder extends Seeder
             'status_response' => 0,
             'type' => 3,
             'request_id' => 3,
-            'student_id' => 4,
-            'coordinator_id' => 2,
+            'user_id' => 4,
+            'type_user' => 'estudiante',
         ]);
 
     }

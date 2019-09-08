@@ -13,9 +13,8 @@ class AuthController extends ApiController
 {
     public $tokens;
 
-    public function __construct(TokenRepositoryInterface $tokens)
+    public function __construct()
     {
-        $this->tokens = $tokens;
         //$this->middleware('auth:api', ['except' => ['login']]);
         //$this->middleware('auth',['except'=>['auth/login']]);
     }

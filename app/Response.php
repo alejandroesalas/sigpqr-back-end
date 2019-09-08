@@ -11,7 +11,7 @@ class Response extends Model
     use SoftDeletes;
     protected $table = 'responses';
     protected $fillable = [
-        'request_id','title','description','student_id','coordinator_id','status_response','type'
+        'request_id','title','description','user_id','type_user','status_response','type'
     ];
 
     public function setTitleAttribute($valor)
@@ -20,6 +20,16 @@ class Response extends Model
     }
 
     public function getTitleAttribute($valor)
+    {
+        return ucwords($valor);
+    }
+
+    public function setTypeUserAttribute($valor)
+    {
+        $this->attributes['type_user'] = Str::lower($valor);
+    }
+
+    public function getTypeUserAttribute($valor)
     {
         return ucwords($valor);
     }

@@ -19,11 +19,9 @@ class CreateResponsesTable extends Migration
             $table->string('description', 1000);
             $table->integer('status_response')->unsigned();
             $table->integer('type')->unsigned();
-
             $table->unsignedBigInteger('request_id');
-            $table->integer('student_id')->unsigned()->nullable();
-            $table->integer('coordinator_id')->unsigned()->nullable();
-
+            $table->integer('user_id')->unsigned();
+            $table->string('type_user');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('request_id')->references('id')->on('requests');

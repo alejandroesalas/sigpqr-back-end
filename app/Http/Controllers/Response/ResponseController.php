@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Response;
 
 use App\AttachmentResponse;
 use App\Http\Controllers\ApiController;
+use App\Profile;
+use App\Request as AppRequest;
 use App\Response;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class ResponseController extends ApiController
 {
@@ -18,8 +23,6 @@ class ResponseController extends ApiController
         'request_id'=>'required|integer',
         'title'=>'required|max:200',
         'description'=>'max:500',
-        'student_id'=>'required|integer',
-        'coordinator_id'=> 'required|integer',
         'status_response'=> 'integer',
         'type'=>'integer'
     );
@@ -54,24 +57,42 @@ class ResponseController extends ApiController
                     if ($validate->fails()){
                             return $this->errorResponse("datos no validos",$validate->errors());
                     }else{
-
+                        $user = auth()->user();
+                        $profile = Profile::where('id',  $user->profile_id)->first();
+                        $nameProfile = $profile->name;
                         $response = new Response;
                         $response->title = $params_array['title'];
                         $response->description = $params_array['description'];
                         $response->status_response = $params_array['status_response'];
                         $response->type = $params_array['type'];
                         $response->request_id = $params_array['request_id'];
-                        $response->student_id = $params_array['student_id'];
-                        $response->coordinator_id = $params_array['coordinator_id'];
+                        $response->user_id = $user->id;
+                        $response->type_user = $nameProfile;
+                        $params_array['user_id'] = $user->id;
+                        $params_array['type_user'] = $nameProfile;
 
-                        DB::transaction(function () use ($params_array) {
-                            $response =  Response::create($params_array);
-                            $responseId = $response->id;
-                            if(Arr::has($params_array, 'attachments')) {
-                                $length = count($params_array['attachments']);
-                                for ($i=0; $i < $length; $i++) {
-                                    $params_array['attachments'][$i]['response_id'] = $responseId;
-                                    AttachmentResponse::create($params_array['attachments'][$i]);
+                        DB::transaction(function () use ($params_array, $nameProfile) {
+                            $statusRequest = AppRequest::where('id', $params_array['request_id'])
+                                ->first();
+                            if($statusRequest->status == 'abierta' && $nameProfile == 'estudiante'){
+                                $response = Response::create($params_array);
+                                $responseId = $response->id;
+                                if(Arr::has($params_array, 'attachments')) {
+                                    $length = count($params_array['attachments']);
+                                    for ($i=0; $i < $length; $i++) {
+                                        $params_array['attachments'][$i]['response_id'] = $responseId;
+                                        AttachmentResponse::create($params_array['attachments'][$i]);
+                                    }
+                                }
+                            } else {
+                                $response = Response::create($params_array);
+                                $responseId = $response->id;
+                                if(Arr::has($params_array, 'attachments')) {
+                                    $length = count($params_array['attachments']);
+                                    for ($i=0; $i < $length; $i++) {
+                                        $params_array['attachments'][$i]['response_id'] = $responseId;
+                                        AttachmentResponse::create($params_array['attachments'][$i]);
+                                    }
                                 }
                             }
                         });
