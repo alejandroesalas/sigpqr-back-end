@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'lastname' => 'admin',
-            'email' => 'alejandro.lopez@cecar.edu.co',
+            'email' => 'emailsigpqr@gmail.com',
             'id_type' => User::CC_TYPE,
             'id_num' => '1234',
             'password' => bcrypt('admin'),
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'coordinador.coordinador@cecar.edu.co',
             'id_type' => User::CC_TYPE,
             'id_num' => '123',
-            'password' => bcrypt('123'),
+            'password' => bcrypt('123456'),
             'verified' => 1,
             'status' => User::ACTIVE_STATE,
             'admin' => User::REGULAR_USER,
