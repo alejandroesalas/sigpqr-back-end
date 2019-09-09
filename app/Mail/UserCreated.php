@@ -22,7 +22,7 @@ class UserCreated extends Mailable
     public function __construct(User $user)
     {
         $this->user = $user;
-        $this->_route = "http://localhost:4200/verify/".$this->user->verification_token;
+        $this->_route = "https://sigpqr-front-end.herokuapp.com/verify/".$this->user->verification_token;
     }
 
     /**

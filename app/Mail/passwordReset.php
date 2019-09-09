@@ -19,7 +19,7 @@ class passwordReset extends Mailable
     public function __construct($token)
     {
         $this->$token = $token;
-        $this->_route = "http://localhost:4200/password/reset/".$token;
+        $this->_route = "https://sigpqr-front-end.herokuapp.com/password/reset/".$token;
     }
 
     /**
