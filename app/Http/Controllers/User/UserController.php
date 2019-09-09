@@ -47,6 +47,7 @@ class UserController extends ApiController
     {
         $rules = [
             'name'=>'required',
+            'profile_id'=>'required',
             'lastname'=>'required',
             'email' => 'email|unique:users',
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
@@ -62,7 +63,7 @@ class UserController extends ApiController
                 }else{
                     unset($params_array['program_id ']);
                     $params_array['password'] = bcrypt($params_array['id_num']);
-                    $params_array['profile_id'] = User::TEACHER_PROFILE;
+                    // $params_array['profile_id'] = User::TEACHER_PROFILE;
                     $params_array['status'] = User::FALSE_STATE;
                     $params_array['admin'] = User::REGULAR_USER;
                     $params_array['verified']= User::VERIFIED_USER;
