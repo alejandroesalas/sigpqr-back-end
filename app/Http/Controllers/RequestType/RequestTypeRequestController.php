@@ -25,7 +25,7 @@ class RequestTypeRequestController extends ApiController
         $requests = $requestType->requests()
             ->where('program_id', $program->id)
             ->with('responses')
-            ->with('students')
+            ->with('student')
             ->get();
         return $this->showAll($requests);
     }
