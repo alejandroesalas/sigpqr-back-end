@@ -24,6 +24,7 @@ class RequestTypeRequestController extends ApiController
             ->first();
         $requests = $requestType->requests()
             ->where('program_id', $program->id)
+            ->with('responses')
             ->get();
         return $this->showAll($requests);
     }
