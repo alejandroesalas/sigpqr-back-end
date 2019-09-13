@@ -72,10 +72,12 @@ class ResponseController extends ApiController
                         $params_array['user_id'] = $user->id;
                         $params_array['type_user'] = $nameProfile;
 
-                        DB::transaction(function () use ($params_array, $nameProfile) {
+                        $statusTransaction = false;
+                        DB::transaction(function () use ($params_array, $nameProfile,$statusTransaction) {
                             $statusRequest = AppRequest::where('id', $params_array['request_id'])
                                 ->first();
-                            if($statusRequest->status == 'abierta' && ($nameProfile == 'estudiante' || $nameProfile == 'coordinador')){
+                            if(($statusRequest->status == 'abierta' && ($nameProfile == 'estudiante' || $nameProfile == 'coordinador'))||
+                                ($statusRequest->status == 'en proceso' && $nameProfile == 'coordinador')){
                                 $response = Response::create($params_array);
                                 $responseId = $response->id;
                                 if(Arr::has($params_array, 'attachments')) {
@@ -85,7 +87,7 @@ class ResponseController extends ApiController
                                         AttachmentResponse::create($params_array['attachments'][$i]);
                                     }
                                 }
-                            } else if ($statusRequest->status == 'en proceso' && $nameProfile == 'coordinador'){
+                            } /*else if ($statusRequest->status == 'en proceso' && $nameProfile == 'coordinador'){
                                 $response = Response::create($params_array);
                                 $responseId = $response->id;
                                 if(Arr::has($params_array, 'attachments')) {
@@ -95,7 +97,7 @@ class ResponseController extends ApiController
                                         AttachmentResponse::create($params_array['attachments'][$i]);
                                     }
                                 }
-                            }
+                            }*/
                         });
                         return $this->showOne($response);
                     }
