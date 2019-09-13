@@ -115,7 +115,7 @@ class DatabaseSeeder extends Seeder
         DB::table('responses')->insert([
             'title' => 'titulo1',
             'description' => 'parrafo1',
-            'status_response' => 1,
+            'status_response' => 'abierta',
             'type' => 1,
             'request_id' => 1,
             'user_id' => 5,
@@ -135,7 +135,7 @@ class DatabaseSeeder extends Seeder
         DB::table('responses')->insert([
             'title' => 'titulo2',
             'description' => 'parrafo2',
-            'status_response' => 1,
+            'status_response' => 'abierta',
             'type' => 2,
             'request_id' => 2,
             'user_id' => 3,
@@ -155,7 +155,7 @@ class DatabaseSeeder extends Seeder
         DB::table('responses')->insert([
             'title' => 'titulo3',
             'description' => 'parrafo3',
-            'status_response' => 0,
+            'status_response' => 'abierta',
             'type' => 3,
             'request_id' => 3,
             'user_id' => 4,

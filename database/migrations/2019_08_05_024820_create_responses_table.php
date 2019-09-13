@@ -17,7 +17,7 @@ class CreateResponsesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('description', 1000);
-            $table->integer('status_response')->unsigned();
+            $table->string('status_response');
             $table->integer('type')->unsigned();
             $table->unsignedBigInteger('request_id');
             $table->integer('user_id')->unsigned();

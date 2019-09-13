@@ -79,6 +79,8 @@ class ResponseController extends ApiController
                             if(($statusRequest->status == 'abierta' && ($nameProfile == 'estudiante' || $nameProfile == 'coordinador'))||
                                 ($statusRequest->status == 'en proceso' && $nameProfile == 'coordinador')){
                                 $response = Response::create($params_array);
+                                $statusRequest->status = $params_array['status_response'];
+                                $statusRequest->save();
                                 $responseId = $response->id;
                                 if(Arr::has($params_array, 'attachments')) {
                                     $length = count($params_array['attachments']);
@@ -87,17 +89,7 @@ class ResponseController extends ApiController
                                         AttachmentResponse::create($params_array['attachments'][$i]);
                                     }
                                 }
-                            } /*else if ($statusRequest->status == 'en proceso' && $nameProfile == 'coordinador'){
-                                $response = Response::create($params_array);
-                                $responseId = $response->id;
-                                if(Arr::has($params_array, 'attachments')) {
-                                    $length = count($params_array['attachments']);
-                                    for ($i=0; $i < $length; $i++) {
-                                        $params_array['attachments'][$i]['response_id'] = $responseId;
-                                        AttachmentResponse::create($params_array['attachments'][$i]);
-                                    }
-                                }
-                            }*/
+                            }
                         });
                         return $this->showOne($response);
                     }
