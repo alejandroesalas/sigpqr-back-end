@@ -11,7 +11,7 @@ class Response extends Model
     use SoftDeletes;
     protected $table = 'responses';
     protected $fillable = [
-        'request_id','title','description','user_id','type_user','status_response','type'
+        'request_id','title','description','user_id','user_email','type_user','status_response','type'
     ];
 
     public function setTitleAttribute($valor)

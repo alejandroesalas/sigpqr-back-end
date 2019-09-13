@@ -67,6 +67,7 @@ class ResponseController extends ApiController
                         $response->type = $params_array['type'];
                         $response->request_id = $params_array['request_id'];
                         $response->user_id = $user->id;
+                        $response->user_email = $params_array['user_email'];
                         $response->type_user = $nameProfile;
                         $params_array['user_id'] = $user->id;
                         $params_array['type_user'] = $nameProfile;
@@ -74,7 +75,7 @@ class ResponseController extends ApiController
                         DB::transaction(function () use ($params_array, $nameProfile) {
                             $statusRequest = AppRequest::where('id', $params_array['request_id'])
                                 ->first();
-                            if($statusRequest->status == 'abierta' && $nameProfile == 'estudiante'){
+                            if($statusRequest->status == 'abierta' && ($nameProfile == 'estudiante' || $nameProfile == 'coordinador')){
                                 $response = Response::create($params_array);
                                 $responseId = $response->id;
                                 if(Arr::has($params_array, 'attachments')) {
@@ -84,7 +85,7 @@ class ResponseController extends ApiController
                                         AttachmentResponse::create($params_array['attachments'][$i]);
                                     }
                                 }
-                            } else {
+                            } else if ($statusRequest->status == 'en proceso' && $nameProfile == 'coordinador'){
                                 $response = Response::create($params_array);
                                 $responseId = $response->id;
                                 if(Arr::has($params_array, 'attachments')) {

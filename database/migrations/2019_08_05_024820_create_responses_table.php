@@ -21,6 +21,7 @@ class CreateResponsesTable extends Migration
             $table->integer('type')->unsigned();
             $table->unsignedBigInteger('request_id');
             $table->integer('user_id')->unsigned();
+            $table->string('user_email');
             $table->string('type_user');
             $table->timestamps();
             $table->softDeletes();

@@ -43,13 +43,12 @@ class DatabaseSeeder extends Seeder
             'status' => User::ACTIVE_STATE,
             'admin' => User::ADMIN_USER,
             'program_id' => null,
-            'profile_id' => User::ADMIN_PROFILE,
-            'verification_token' => Str::random(40),
+            'profile_id' => User::ADMIN_PROFILE
         ]);
         DB::table('users')->insert([
-            'name' => 'coordinador',
-            'lastname' => 'coordinador',
-            'email' => 'coordinador.coordinador@cecar.edu.co',
+            'name' => 'Jorge',
+            'lastname' => 'Marquez',
+            'email' => 'Jorge.Marquez@cecar.edu.co',
             'id_type' => User::CC_TYPE,
             'id_num' => '123',
             'password' => bcrypt('123456'),
@@ -57,8 +56,7 @@ class DatabaseSeeder extends Seeder
             'status' => User::ACTIVE_STATE,
             'admin' => User::REGULAR_USER,
             'program_id' => null,
-            'profile_id' => User::ADMIN_PROFILE,
-            'verification_token' => Str::random(40),
+            'profile_id' => User::COORDINATOR_PROFILE
         ]);
 
         // Registro de perfiles
@@ -111,7 +109,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'abierta',
             'request_type_id' => 1,
             'program_id' => 1,
-            'student_id' => 2,
+            'student_id' => 5,
         ]);
         // Registro de respuesta
         DB::table('responses')->insert([
@@ -120,7 +118,8 @@ class DatabaseSeeder extends Seeder
             'status_response' => 1,
             'type' => 1,
             'request_id' => 1,
-            'user_id' => 2,
+            'user_id' => 5,
+            'user_email'=>'correo4@gmail.com',
             'type_user' => 'estudiante',
         ]);
         // Registro de peticion
@@ -140,6 +139,7 @@ class DatabaseSeeder extends Seeder
             'type' => 2,
             'request_id' => 2,
             'user_id' => 3,
+            'user_email'=>'correo2@gmail.com',
             'type_user' => 'estudiante',
         ]);
         // Registro de peticion
@@ -159,6 +159,7 @@ class DatabaseSeeder extends Seeder
             'type' => 3,
             'request_id' => 3,
             'user_id' => 4,
+            'user_email'=>'correo3@gmail.com',
             'type_user' => 'estudiante',
         ]);
 
