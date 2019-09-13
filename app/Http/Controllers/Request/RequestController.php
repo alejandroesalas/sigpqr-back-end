@@ -31,7 +31,6 @@ class RequestController extends ApiController
     {
         $student = auth()->user();
         $_requests = AppRequest::where('student_id', $student->id)
-            ->with('program')
             ->with('program.coordinator')
             ->get();
         return $this->showAll($_requests);
@@ -39,7 +38,7 @@ class RequestController extends ApiController
 
     public function show(AppRequest $request)
     {
-        $request->load(['responses','attachments']);
+        $request->load(['student','responses','attachments']);
         return $this->showOne($request);
     }
 
