@@ -23,7 +23,7 @@ class ResponseController extends ApiController
         'request_id'=>'required|integer',
         'title'=>'required|max:200',
         'description'=>'max:500',
-        'status_response'=> 'integer',
+        'status_response'=> 'required',
         'type'=>'integer'
     );
     private $updateRules =array(
@@ -76,8 +76,8 @@ class ResponseController extends ApiController
                         DB::transaction(function () use ($params_array, $nameProfile,$statusTransaction) {
                             $statusRequest = AppRequest::where('id', $params_array['request_id'])
                                 ->first();
-                            if(($statusRequest->status == 'abierta' && ($nameProfile == 'estudiante' || $nameProfile == 'coordinador'))||
-                                ($statusRequest->status == 'en proceso' && $nameProfile == 'coordinador')){
+                            if(($statusRequest->status == 'abierta' && ($nameProfile == 'Estudiante' || $nameProfile == 'Coordinador'))||
+                                ($statusRequest->status == 'en proceso' && $nameProfile == 'Coordinador')){
                                 $response = Response::create($params_array);
                                 $statusRequest->status = $params_array['status_response'];
                                 $statusRequest->save();
@@ -97,7 +97,7 @@ class ResponseController extends ApiController
                 return $this->errorResponse('Datos Vacios!',422);
             }
         }else{
-            return $this->errorResponse('La estrucutra del json no es valida',422);
+            return $this->errorResponse('La estrucutra del json no es valida','',422);
         }
     }
 
