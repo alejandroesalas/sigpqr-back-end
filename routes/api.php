@@ -52,6 +52,7 @@ Route::apiResource('profiles','Profile\ProfileController');
 Route::get('profiles/{id}/users','Profile\ProfileController@usersByProfile');
 //Ruta para las requestsType(tipos de solicitudes)
 Route::resource('request-types','RequestType\RequestTypeController');
+Route::get('count-request-types/{request_type}','RequestType\RequestTypeController@countRequestType');
 //ruta del controlador de Estudiantes
 Route::resource('students', 'Student\StudentController', ['except' => ['create', 'edit']]);
 Route::get('count-students','Student\StudentController@countStudents');
