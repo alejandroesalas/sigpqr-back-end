@@ -17,7 +17,6 @@ class RequestController extends ApiController
     private $rules = array(
         'title' => 'required|max:200',
         'description' => 'max:500',
-        'status' => 'required',
         'request_type_id' => 'required|integer',
         'program_id' => 'required|integer',
         'student_id' => 'required|integer',
@@ -107,7 +106,7 @@ class RequestController extends ApiController
                     return $this->showOne($response);
                 }
             } else {
-                return $this->errorResponse('Datos Vacios!', 422);
+                return $this->errorResponse('Datos Vacios!', '',422);
             }
         } else {
             return $this->errorResponse('La estrucutra del json no es valida', 422);
