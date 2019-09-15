@@ -4,6 +4,9 @@ namespace App\Http\Controllers\RequestType;
 
 use App\Http\Controllers\ApiController;
 use App\RequestType;
+use App\User;
+use App\Program;
+use App\Request as AppRequest;
 use Illuminate\Http\Request;
 
 class RequestTypeController extends ApiController
@@ -23,6 +26,25 @@ class RequestTypeController extends ApiController
         return $this->showAll(RequestType::all());
     }
 
+
+    public function countRequestType(RequestType $requestType)
+    {
+        $requestTypeId = $requestType->id;
+        $user = auth()->user();
+        $userId = $user->id;
+        $result = 0;
+        if($user->profile_id == User::STUDENT_PROFILE) {
+            $result = AppRequest::where('student_id', $userId)
+                ->where('request_type_id', $requestTypeId)
+                ->count();
+        } else {
+            $program = Program::where('coordinator_id', $userId)->first();
+            $result = AppRequest::where('program_id', $program->id)
+                ->where('request_type_id', $requestTypeId)
+                ->count();
+        }
+        return  $this->showOther($result);
+    }
 
     /**
      * Store a newly created resource in storage.

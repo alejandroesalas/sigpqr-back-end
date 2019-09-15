@@ -17,7 +17,6 @@ class RequestController extends ApiController
     private $rules = array(
         'title' => 'required|max:200',
         'description' => 'max:500',
-        'status' => 'required',
         'request_type_id' => 'required|integer',
         'program_id' => 'required|integer',
         'student_id' => 'required|integer',
@@ -88,7 +87,7 @@ class RequestController extends ApiController
                     $response = new AppRequest;
                     $response->title = $params_array['title'];
                     $response->description = $params_array['description'];
-                    $response->status = $params_array['status'];
+                    $response->status = 'abierta';
                     $response->request_type_id = $params_array['request_type_id'];
                     $response->program_id = $params_array['program_id'];
                     $response->student_id = $params_array['student_id'];
