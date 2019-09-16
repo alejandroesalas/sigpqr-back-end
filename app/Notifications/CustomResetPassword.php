@@ -22,7 +22,7 @@ class CustomResetPassword extends ResetPassword
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->view('emails.passwordReset',['_route'=>"http://localhost:4200/password/reset/".$this->token])
+            ->view('emails.passwordReset',['_route'=>"https://sigpqr-front-end.herokuapp.com/password/reset/".$this->token])
             ->subject('Cambio de Contraseña');
 
     }
