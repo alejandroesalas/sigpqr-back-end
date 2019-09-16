@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
 //ruta del controlador de auth para login
 Route::group([
     'prefix' => 'auth',
