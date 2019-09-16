@@ -23,7 +23,6 @@ class ResponseController extends ApiController
         'request_id'=>'required|integer',
         'title'=>'required|max:200',
         'description'=>'max:500',
-        'status_response'=> 'required',
         'type'=>'integer'
     );
     private $updateRules =array(
