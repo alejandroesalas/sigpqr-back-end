@@ -79,7 +79,7 @@ class ResponseController extends ApiController
                             if(($statusRequest->status == 'abierta' && ($nameProfile == 'Estudiante' || $nameProfile == 'Coordinador'))||
                                 ($statusRequest->status == 'en proceso' && $nameProfile == 'Coordinador')){
                                 $response = Response::create($params_array);
-                                $statusRequest->status = $params_array['status_response'];
+                                $statusRequest->status = $nameProfile == 'Coordinador'?$params_array['status_response']:$statusRequest->status;
                                 $statusRequest->save();
                                 $responseId = $response->id;
                                 if(Arr::has($params_array, 'attachments')) {
