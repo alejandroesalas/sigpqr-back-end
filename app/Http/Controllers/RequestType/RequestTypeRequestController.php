@@ -11,6 +11,11 @@ use Illuminate\Http\Response;
 
 class RequestTypeRequestController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        //$this->middleware('auth',['except'=>['auth/login']]);
+    }
     /**
      * Display a listing of the resource.
      *

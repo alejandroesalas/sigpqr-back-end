@@ -14,6 +14,10 @@ use Tymon\JWTAuth\JWTAuth;
 
 class RequestController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     private $rules = array(
         'title' => 'required|max:200',
         'description' => 'max:500',

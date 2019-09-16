@@ -11,6 +11,10 @@ use App\User;
 
 class StudentRequestController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     /**
      *Devuelve las solicitudes que haya realizado el estudiante.
      * adicional envia las respuestas que la solicitud tenga

@@ -12,7 +12,7 @@ class ProfileController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['usersByProfile','index']]);
+        $this->middleware('auth:api');
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
     private $rules =array(
