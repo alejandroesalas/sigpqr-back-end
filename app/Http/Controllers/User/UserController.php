@@ -13,7 +13,7 @@ class UserController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api',['except'=>['checkEmail']]);
+        $this->middleware('auth:api',['except'=>['checkEmail','verify']]);
     }
     /**
      * Display a listing of the resource.
