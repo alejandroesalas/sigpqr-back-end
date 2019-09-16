@@ -86,6 +86,8 @@ Route::resource('requests','Request\RequestController',['only'=>['index','show',
 Route::resource('request-types.requests','RequestType\RequestTypeRequestController', ['only' => ['index']]);
 Route::get('student-request-types/{request_type}/requests','RequestType\RequestTypeRequestController@showByStudent');
 Route::resource('responses','Response\ResponseController', ['only' => ['store', 'update']]);
+
+Route::post('download','Request\RequestController@getFiles');
 /*Route::post('/api/users/upload','PostController@upload');
 Route::get('/api/post/avatar/{filename}','PostController@getImage');
 Route::get('/api/post/category/{id}','PostController@getPostsByCategory');

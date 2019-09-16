@@ -6,6 +6,7 @@ use App\AttachmentRequest;
 use App\Http\Controllers\ApiController;
 use App\Request as AppRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class RequestController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        //$this->middleware('auth:api');
     }
     private $rules = array(
         'title' => 'required|max:200',
@@ -69,7 +70,19 @@ class RequestController extends ApiController
             return $this->showMessage('error al subi archivos', 400);
         }
     }
+    public function getFiles(Request $request)
+    {
+        $route = $request->filename;
+        $path = substr($route,7,strlen($route));
+        if (!Storage::disk('upload')->exists($path)) {
+            return $this->errorResponse('Archivo no escite');
 
+        }else{
+           $file = Storage::disk('upload')->get($path);
+            return new Response($file,200);
+        }
+
+    }
     /**
      * Store a newly created resource in storage.
      *
