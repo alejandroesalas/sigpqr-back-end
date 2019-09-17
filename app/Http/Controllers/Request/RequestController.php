@@ -72,7 +72,17 @@ class RequestController extends ApiController
     }
     public function getFiles(Request $request)
     {
-        $route = $request->filename;
+
+        $route = $request->query();
+        $path = substr($route['filename'],7,strlen($route['filename']));
+        if (!Storage::disk('upload')->exists($path)) {
+            return $this->errorResponse('Archivo no escite');
+
+        }else{
+            $file = Storage::disk('upload')->get($path);
+            return new Response($file,200);
+        }
+       /* $route = $request->filename;
         $path = substr($route,7,strlen($route));
         if (!Storage::disk('upload')->exists($path)) {
             return $this->errorResponse('Archivo no escite');
@@ -80,7 +90,7 @@ class RequestController extends ApiController
         }else{
            $file = Storage::disk('upload')->get($path);
             return new Response($file,200);
-        }
+        }*/
 
     }
     /**
